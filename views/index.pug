@@ -1,48 +1,231 @@
 doctype html
-head
-	title [TS] Dev Server  | AU
-	link(rel="icon", href="https://i.imgur.com/cUBD1EE.png", type="image/x-icon")
-
-	meta(property='og:title' content='The Skeld | Crew Link Server #1 - AU')
-	meta(property='og:description' content='Voice server for Among Us proximity chat - Hosted by The Skeld / My Name is Tito#8244')
-	meta(property='og:title' content='The Skeld | Crew Link Server #3')
-	meta(property='og:description' content='Voice server for Among Us proximity chat')
-
-	meta(property='og:image' content='https://i.imgur.com/cUBD1EE.png')
-	style.
-		body {
-		background-color: #23272a;
-		color: white;
-		font-family: sans-serif;
-		text-align: center;
-		}
-		img {
-		height: 128px;
-		width: 128px;
-		margin: 32px auto;
-		display: block;
-		}
-		a {
-			text-decoration: none;
-			color: #3498db
-		}
-		a:hover {
-			text-decoration: underline;
-		}
-img(src="https://i.imgur.com/cUBD1EE.png")
-h1 The Skeld's CrewLink Dev Server | AU
-p 
-	| There #{connectionCount === 1 ? 'is' : 'are'} currently 
-	span(id="PlayerCount") #{connectionCount} 
-	| user#{connectionCount === 1 ? '' : 's'} connected to this Crew Link Server.
-p 
-	| Join Our Discord For Voice Proximity Lobbies! 
-	a(href="https://discord.gg/XSt4AH79MT", target="_blank") Click here to join
-	| .
-p 
-	| Hosted by 
-	a(href="https://discordapp.com/users/611746802122620937", target="_blank") My Name is Tito#8244
-	|
-
-
-
+html
+  head
+    title CrewLink Server
+    meta(name='viewport' content='width=device-width, initial-scale=1.0')
+    script(src='https://crewlinkjson.glitch.me/data.js?v=1')
+    script.
+      if (location.protocol != 'https:') {
+      location.href = 'https:' + window.location.href.substring(window.location.protocol.length);
+      }
+      //var subdomain = "test";
+      var subdomain = window.location.host.split(".")[0];
+      try {
+      if (data[subdomain] != undefined) {
+      console.log('Custom Banner Found');
+      document.write(`<div class="banner" style="color: ${data[subdomain].textcolor}; background-color: ${data[subdomain].bgcolor};">${data[subdomain].msg}</div>`);
+      window.onload = function () {
+      window.scrollTo(0, 0);
+      document.getElementById("a").innerHTML = `${data[subdomain].name}'s`;
+      document.getElementById("t").innerHTML = `CrewLink Server`;
+      document.getElementById("d").remove();
+      document.getElementById("url2").remove();
+      document.getElementById("url").value = window.location.href.slice(0, -1);
+      document.getElementById("other").remove();
+      var e = document.createElement('sub');
+      e.style = 'font-size: 7px; margin: 1px;';
+      e.innerHTML = 'Powered By <a href="https://crewmate.chat/">Crewmate.chat</a> & <a href="https://crewlink.glitch.me/">Crewlink.glitch.me</a>';
+      document.getElementById("tutorial").append(e);
+      document.getElementsByClassName("online")[0].remove();
+      document.getElementById("r").innerHTML = `4. In the field, enter the following:`;
+      document.getElementById("i").src = data[subdomain].img;
+      if (document.getElementsByClassName("announcement").length > 0) {
+      document.getElementsByClassName("announcement")[0].remove();
+      }
+      }
+      }
+      } catch (err) {
+      console.log(err);
+      }
+    style.
+      @font-face {
+      font-family: 'amongus';
+      src: URL('https://cdn.glitch.com/aee4830c-69c1-45ce-b954-54174e6b39ad%2Famongus.ttf?v=1607382044419') format('truetype');
+      }
+      body {
+      background-color: black;
+      color: white;
+      font-family: sans-serif;
+      text-align: center;
+      margin: 0;
+      height: 100%;
+      }
+      img {
+      height: 128px;
+      width: 128px;
+      margin: auto;
+      margin-top: 0;
+      display: block;
+      -webkit-filter: drop-shadow(1px 1px 0 white) drop-shadow(-1px -1px 0 white);
+      filter: drop-shadow(1px 1px 0 white) drop-shadow(-1px -1px 0 white);
+      }
+      a {
+      text-decoration: none;
+      color: #3498db
+      }
+      a:hover {
+      text-decoration: underline;
+      }
+      .holder {
+      background-color: #23272a;
+      border-radius: 5px;
+      color: white;
+      padding: 5px;
+      width: 100%;
+      max-width: 600px;
+      margin: auto;
+      }
+      .announcement {
+      background-color: #23272a;
+      border-radius: 5px;
+      color: white;
+      padding: 5px;
+      width: 100%;
+      max-width: 600px;
+      margin: auto;
+      margin-bottom: 16px;
+      }
+      .online {
+      color: chartreuse;
+      }
+      @keyframes slideleft {
+      from {
+      background-position: 0%;
+      }
+      to {
+      background-position: 90000%;
+      }
+      }
+      @-webkit-keyframes slideleft {
+      from {
+      background-position: 0%;
+      }
+      to {
+      background-position: 90000%;
+      }
+      }
+      .bg {
+      background-image: url('https://static.lermatroid.com/img/spacebg.jpg');
+      background-repeat: repeat-x;
+      animation: slideleft 800s infinite linear;
+      background-size: zoom;
+      -webkit-animation: slideleft 800s infinite linear;
+      width: 100%;
+      min-height: 100vh;
+      margin: 0;
+      padding-bottom: 10px;
+      }
+      input {
+      background-color: black;
+      color: white;
+      border: 1px solid white;
+      border-radius: 2px;
+      }
+      .banner {
+      height: 30px;
+      width: 100%;
+      overflow: hidden;
+      text-align: center;
+      margin-bottom: 30px;
+      line-height: 30px;
+      }
+      .banner a {
+      text-decoration: underline;
+      }
+      .hidden {
+      display: none;
+      }
+  body
+    #view.bg
+      img#i(src='https://github.com/ottomated/CrewLink/raw/master/logo.png' height='128' width='128')
+      b
+        p#a(style='margin-bottom: 10px; font-family: amongus; font-size: 25px;') Lermatroid's
+      h1#t(style='margin-top: 0; margin-bottom: 15px; font-family: amongus; font-size: 75px;')
+        | Public CrewLink
+        | Server
+      p#d(style='margin-top: 0; font-family: amongus; font-size: 25px;')
+        | A Public CrewLink Server Anyone Can Use!
+      p.online There #{connectionCount === 1 ? 'is' : 'are'} currently #{connectionCount} connected user#{connectionCount === 1 ? '' : 's'}.
+      .announcement
+        b
+          p Announcement!
+        p
+          | This server now has a alternative URL, 
+          input(style='text-align: center;' type='text' value='https://crewmate.chat' readonly='')
+          |  !
+        b
+          p
+            | crewlink.glitch.me and crewmate.chat players *are* able to play together!
+            br
+            | No matter which one of
+            |                     the two servers they are using!
+        p
+          | The main reason for this change is that crewmate.chat is easier to remember and tell people verbally.
+      #tutorial.holder
+        p
+          b How To Use:
+        p
+          | 1. Install CrewLink from 
+          a(href='https://github.com/ottomated/CrewLink/releases') The Official Github
+          |                 (If
+          |                 you
+          |                 have not already)
+        p 2. Click on the settings icon in the top left of CrewLink
+        p 3. Scroll down to the section named "Voice Server"
+        p#r 4. In the field, enter one of the following:
+        input#url(style='text-align: center; margin: 5px;' type='text' value='https://crewlink.glitch.me' readonly='')
+        input#url2(style='text-align: center; margin: 5px;' type='text' value='https://crewmate.chat' readonly='')
+        p
+          | 5. Click the back button to got back to the CrewLink main menu and press ctrl + r
+        p
+          b Thats It! Enjoy Playing!
+        #other
+          i
+            p(style='border: white solid 3px; border-radius: 2px; padding-top: 5px; padding-bottom: 4px;')
+              | Note:
+              | Both 
+              b crewlink.glitch.me
+              |  and 
+              b crewmate.chat
+              |  players can play together. However,
+              |                         please
+              |                         keep in mind that when playing with others on a voice server that is not one of those two, they
+              |                         must
+              |                         use the same voice
+              |                         server as you.
+          br
+          hr(style='height:2px;border-width:0;color:gray;background-color:gray;max-width:90%;')
+          p Need help?
+          p Feel free to PM me on Discord (@Lermatroid#7302) with any questions :)
+          hr(style='height:2px;border-width:0;color:gray;background-color:gray;max-width:90%;margin-bottom:25px;')
+          p
+            | Enjoy using this server? Consider 
+            a(href='https://paypal.me/itsliammurray' target='_blank')
+              | donating
+              | here
+            |  to help cover server costs
+            sup(style='font-size: 7px;') Thanks :)
+            br
+            |  + get a
+            |                     awesome 
+            a(href='https://lermatroid.com/crewlink-donation') Custom CrewLink Server Page
+            | .
+          a(href='https://glitch.com/~crewlink' target='_blank') View The Live Source Code
+          p
+            | Want to launch your own server? 
+            a(href='https://github.com/ottomated/CrewLink-server' target='_blank')
+              | Click here
+              | to learn how
+            | .
+      sub(style='font-size: 7px; margin: 1px;')
+        | Site Design & Server Modifications By 
+        a(href='https://lermatroid.com') Lermatroid
+        br
+      sub(style='font-size: 7px; margin: 1px;')
+        a(href='https://github.com/ottomated/CrewLink-server')
+          | CrewLink
+          | Server
+        |  By 
+        a(href='https://ottomated.net/') Ottomated
+        br
+      sub(style='font-size: 7px; margin: 1px;') Please Do Not Copy These Works Without Permission
